@@ -43,16 +43,24 @@
                         <th>Date Purchased</th>
                         <th>Status</th>
                         <th>Total</th>
+                        <th>View</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for order in orders %}
                     <tr>
                         <td class="py-3"><a class="nav-link-style font-weight-medium font-size-sm" href="#order-details"
-                                data-toggle="modal">34VB5540K83</a></td>
-                        <td class="py-3">May 21, 2019</td>
-                        <td class="py-3"><span class="badge badge-info m-0">In Progress</span></td>
-                        <td class="py-3">$358.75</td>
+                                data-toggle="modal">{{order.order_id}}</a></td>
+                        <td class="py-3">{{order.date}}</td>
+                        <td class="py-3"><span class="badge badge-info m-0">{{order.status}}</span></td>
+                        <td class="py-3">{{order.amount}}</td>
+                        <td class="py-3">
+                            <a href="/{{order.order_id}}" class="btn btn-danger btn-sm">View</a>
+                        </td>
+
                     </tr>
+
+                    {%  endfor %}
                 </tbody>
             </table>
 
@@ -62,13 +70,16 @@
     </div>
 </div>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
 <script>
 
 
 function createOrder(id){
-    
-    
+
+   axios.post('/api/order' , {'id': id})
+   .then(res =>{
+       console.log(res)
+   })
 
 }
 
