@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block start %}
+
+
+
+<div class="container">
+
+    <h3>Pizza App</h3>
+
+    <div class="row pt-3 mt-5 pt-sm-0">
+        
+        {% for p in pizza %}
+        <div class="col-lg-3 col-md-4 col-sm-6  mb-grid-gutter ">
+            <div class="card product-card shadow border pb-2"><a class="d-block" href="#quick-view" data-toggle="modal"><img
+                        class="card-img-top" src="{{p.image}}" alt="Pizza"></a>
+                <div class="card-body pt-1 pb-2">
+                    <h3 class="product-title font-size-md"><a href="#quick-view" data-toggle="modal">Pizza Vegano
+                            Delux</a></h3>
+                    <p class="font-size-ms text-muted"> {{p.name}}
+                        </p>
+
+
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="product-price"><span class="text-accent"> ₹ {{p.price}}</span></div>
+                        <button class="btn btn-primary btn-sm" onclick="createOrder({{p.id}})" type="button" data-toggle="toast"
+                            data-target="#cart-toast">+<i class="czi-cart font-size-base ml-1"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+    <div>
+        <h3 class="text-center mb-4">All Orders</h3>
+        <div class="table-responsive font-size-md">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Order #</th>
+                        <th>Date Purchased</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="py-3"><a class="nav-link-style font-weight-medium font-size-sm" href="#order-details"
+                                data-toggle="modal">34VB5540K83</a></td>
+                        <td class="py-3">May 21, 2019</td>
+                        <td class="py-3"><span class="badge badge-info m-0">In Progress</span></td>
+                        <td class="py-3">$358.75</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+
+function createOrder(id){
+    
+    
+
+}
+
+</script>
+
+
+
+
+{% endblock %}

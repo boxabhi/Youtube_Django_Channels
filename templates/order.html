@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block start %}
+
+
+
+<div class="container mt-5 pt-5">
+  <h3>Order id - {{order.order_id}}</h3>
+  <p>Amount - ₹ {{order.amount}}</p>
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="50"
+      aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+  </div>
+
+</div>
+
+
+<script>
+  var order_id = '{{order.order_id}}'
+  let socket = new WebSocket('ws://localhost:8000/ws/pizza/' + order_id);
+  socket.onopen = function (e) {
+    console.log('Connection established');
+  };
+
+  socket.onmessage = function (e) {
+    var data = JSON.parse(e.data)
+    var value = data.payload.progress
+    console.log(data)
+    increaseProgress(value)
+
+  };
+  socket.onclose = function (e) {
+    console.log('Connection closed');
+  };
+
+  function increaseProgress(value){
+    console.log(value)
+    var progress = document.querySelector('.progress-bar')
+    progress.style.width = value + "%"
+   
+  }
+
+  
+
+</script>
+
+
+{% endblock %}
