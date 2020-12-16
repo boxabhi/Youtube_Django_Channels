@@ -34,10 +34,15 @@
   };
 
   function increaseProgress(value , status){
-    console.log(status)
+   
     var progress = document.querySelector('.progress-bar')
     var status_html = document.querySelector('#status')
-    console.log(status)
+   
+    if(value == 100){
+      console.log("ss")
+      progress.classList.add('bg-success')
+    }
+
     status_html.innerHTML  = status
     progress.style.width = value + "%"
    
